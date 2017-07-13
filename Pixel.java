@@ -1,3 +1,7 @@
+/*
+ *  Implementation of a 16-bit RGB pixel.
+ *
+ */
 public class Pixel
 {
     private int r;
@@ -25,13 +29,18 @@ public class Pixel
 
     public static Pixel[] createPixelArray()
     {
-        Pixel[] arr = new Pixel[32*32*32];
+        Pixel[] arr = new Pixel[32*64*32];
         int arr_i = 0;
         for(int r = 0 ; r < 32; r++)
-            for(int g = 0 ; g < 32; g++)
+            for(int g = 0 ; g < 64; g++)
                 for(int b = 0 ; b < 32; b++){
-                    arr[arr_i++] = new Pixel(r,g,b);
+                    arr[arr_i++] = new Pixel(red,gre,blu);
                 }
         return arr;
+    }
+
+    public String toString()
+    {
+        return "R: "+ r + " G: " + g + " B: "+b;
     }
 }
