@@ -26,10 +26,12 @@ public class Pixel
     public static Pixel[] createPixelArray()
     {
         Pixel[] arr = new Pixel[32*32*32];
+        int arr_i = 0;
         for(int r = 0 ; r < 32; r++)
             for(int g = 0 ; g < 32; g++)
-                for(int b = 0 ; b < 32; b++)
-                    arr[r+g+b] = new Pixel(r,g,b);
+                for(int b = 0 ; b < 32; b++){
+                    arr[arr_i++] = new Pixel(r,g,b);
+                }
         return arr;
     }
 }
