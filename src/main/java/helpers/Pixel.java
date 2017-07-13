@@ -1,3 +1,5 @@
+package helpers;
+
 /*
  *  Implementation of a 16-bit RGB pixel.
  *

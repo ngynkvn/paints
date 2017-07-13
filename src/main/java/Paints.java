@@ -1,4 +1,5 @@
 import java.io.*;
+import helpers.*;
 
 public class Paints
 {
@@ -11,7 +12,7 @@ public class Paints
 
         File outFile = new File(a.getFileOutName());
 
-        ImageCreator img = new Algo(a.getAlgo());
+        ImageCreator img = new ImageCreator(a.getAlgo());
 
         img.write(outFile, IMAGE_WIDTH, IMAGE_HEIGHT);
         

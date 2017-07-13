@@ -1,9 +1,11 @@
+package helpers;
+
 public class Arguments
 {
     private final String fileOutName;
     private final String algo;
 
-    Arguments(String [] args)
+    public Arguments(String [] args)
     {
         if(args.length == 0)
         {
