@@ -10,8 +10,11 @@ public class Paints
         Arguments a = new Arguments(args);
 
         File outFile = new File(a.getFileOutName());
-        
-        Algo.write(outFile,a.getAlgo(), IMAGE_WIDTH, IMAGE_HEIGHT);
 
+        ImageCreator img = new Algo(a.getAlgo());
+
+        img.write(outFile, IMAGE_WIDTH, IMAGE_HEIGHT);
+        
+        // algo.write(outFile,a.getAlgo(), IMAGE_WIDTH, IMAGE_HEIGHT);
     }
 }
