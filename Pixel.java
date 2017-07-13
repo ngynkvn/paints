@@ -34,7 +34,7 @@ public class Pixel
         for(int r = 0 ; r < 32; r++)
             for(int g = 0 ; g < 64; g++)
                 for(int b = 0 ; b < 32; b++){
-                    arr[arr_i++] = new Pixel(red,gre,blu);
+                    arr[arr_i++] = new Pixel(r,g,b);
                 }
         return arr;
     }
