@@ -43,11 +43,6 @@ public class NearestNeighbor extends Algorithm
                     continue;
                 }
             }
-            //debug
-            if(best.equals(colorList.get(0)))
-                no_good++;
-            else
-                good++;
 
             available.remove(point);
             colorList.remove(best);
@@ -56,7 +51,6 @@ public class NearestNeighbor extends Algorithm
             img.setRGB(point.x, point.y, best.getRGB());
             
         }
-        System.out.println("Good pixels:"+good + " Bad:" + no_good);
     }
 
     static void selectNextPoint(Point p, HashSet<Point> possible)
@@ -97,16 +91,17 @@ public class NearestNeighbor extends Algorithm
         return Math.sqrt(Math.pow(rD,2) + Math.pow(gD,2) + Math.pow(bD,2));
     }
 
-    static ArrayList<Point> getSurroundingPoints(Point p)
+    public static ArrayList<Point> getSurroundingPoints(Point p)
     {
-        int currX = p.x - 1;
-        int currY = p.y + 1;
+        int currX = p.x;
+        int currY = p.y;
         ArrayList<Point> arr = new ArrayList<Point>(9);
-        for(int i = 0; i < 3; i++)
+        for(int i = -1; i < 2; i++)
         {
-            arr.add(new Point(currX,currY + i));
-            arr.add(new Point(currX + 1,currY + i));
-            arr.add(new Point(currX + 2,currY + i));
+            for(int j = -1; j < 2; j++)
+            {
+                arr.add(new Point(currX+i,currY+j));
+            }
         }
         return arr;
     }
