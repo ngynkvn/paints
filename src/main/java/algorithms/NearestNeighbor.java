@@ -3,13 +3,15 @@ package algorithms;
 import java.awt.image.BufferedImage;
 import java.awt.*;
 import java.util.*;
-import java.util.stream.Collectors;
 
-/*
- *
+/**
+ * I intended for this to be similar to a "nearest neighbor" in terms of selecting colors
+ * The algorithm attempts to select colors off the color array that are similar to the current pixel * being viewed. Color differences are computed using the pythagorean theorem, however apparently 
+ * this does not match up with human perceptions. Still happy with how the picture turns out.
  */
 public class NearestNeighbor extends Algorithm
 {
+    private static final int THRESHOLD = 10;
     public void createImage(BufferedImage img)
     {
         Color [] _arr = createColorArray();
@@ -23,21 +25,17 @@ public class NearestNeighbor extends Algorithm
         available.remove(point);
         Color startingPixel = colorList.remove(0);
 
-        int no_good = 0;
-        int good = 0;
-
         int rgbInt = startingPixel.getRGB();
         img.setRGB(point.x,point.y,rgbInt);
         selectNextPoint(point, available);
         
         while(!available.isEmpty())
         {
-            int threshold = 10;
             Color best = colorList.get(0);
             int currentRGB = img.getRGB(point.x, point.y);
             for(Color c : colorList) 
             {
-                if(distBetween(currentRGB, c.getRGB()) < threshold)
+                if(distBetween(currentRGB, c.getRGB()) < THRESHOLD)
                 {
                     best = c;
                     continue;
@@ -73,7 +71,7 @@ public class NearestNeighbor extends Algorithm
             p.x = next.x;
             p.y = next.y;
             return;
-        }
+        }    
     }
     static void populate(HashSet<Point> hs)
     {

@@ -6,7 +6,7 @@ import java.awt.*;
 /* 
  * 
  * Not really an algorithm, implementation here just displays the created color array.
- * 
+ * Also serves as a demonstration that the algorithm is actually working
  */
 public class Lazy extends Algorithm
 {

@@ -1,6 +1,9 @@
 import java.io.*;
 import helpers.*;
 
+/**
+ * Main file.
+ */
 public class Paints
 {
     public static final int IMAGE_WIDTH = 256;

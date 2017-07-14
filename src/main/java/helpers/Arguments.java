@@ -1,5 +1,11 @@
 package helpers;
 
+/**
+ * Handles the command line arguments that are passed to the program, for now it only holds
+ * a user-defined file output name and algorithm to use.
+ * 
+ * @author Kevin Nguyen
+ */
 public class Arguments
 {
     private final String fileOutName;
@@ -14,13 +20,22 @@ public class Arguments
         }
         else if(args.length == 1)
         {
-            fileOutName = args[0];
+            fileOutName = ensurePngExtension(args[0]);
             algo = "default";
         }
         else
         {
-            fileOutName = args[0];
+            fileOutName = ensurePngExtension(args[0]);
             algo = args[1];
+        }
+    }
+
+    static String ensurePngExtension(String fileName)
+    {
+        if(fileName.contains(".png")){
+            return fileName;
+        } else {
+            return fileName.concat(".png");
         }
     }
 
