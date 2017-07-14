@@ -15,7 +15,5 @@ public class Paints
         ImageCreator img = new ImageCreator(a.getAlgo());
 
         img.write(outFile, IMAGE_WIDTH, IMAGE_HEIGHT);
-        
-        // algo.write(outFile,a.getAlgo(), IMAGE_WIDTH, IMAGE_HEIGHT);
     }
 }

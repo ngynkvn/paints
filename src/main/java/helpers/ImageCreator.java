@@ -17,7 +17,9 @@ public class ImageCreator
 
     public void write(File f, int width, int height)
     {
-                BufferedImage img = a.createImg(width,height);
+        
+                BufferedImage img = new BufferedImage(width,height,BufferedImage.TYPE_INT_RGB);
+                a.createImage(img);
 
                 try {
                 ImageIO.write(img,"png",f);
