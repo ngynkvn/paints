@@ -19,7 +19,7 @@ public abstract class Algorithm
         for(int r = 0 ; r < 32; r++)
             for(int g = 0 ; g < 64; g++)
                 for(int b = 0 ; b < 32; b++){
-                    arr[arr_i++] = new Color(r,g,b);
+                    arr[arr_i++] = new Color(r*8,g*4,b*8);
                 }
         return arr;
     }

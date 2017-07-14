@@ -12,7 +12,7 @@ public class ImageCreator
     private static Algorithm a;
     public ImageCreator(String algo)
     {
-        a = new DefaultAlgo();
+        a = new NearestNeighbor();
     }
 
     public void write(File f, int width, int height)
