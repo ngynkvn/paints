@@ -3,7 +3,11 @@ package algorithms;
 import java.awt.image.BufferedImage;
 import java.awt.*;
 import java.util.*;
+import java.util.stream.Collectors;
 
+/*
+ *
+ */
 public class NearestNeighbor extends Algorithm
 {
     public void createImage(BufferedImage img)
@@ -19,7 +23,8 @@ public class NearestNeighbor extends Algorithm
         available.remove(point);
         Color startingPixel = colorList.remove(0);
 
-        assert available.size() == colorList.size();
+        int no_good = 0;
+        int good = 0;
 
         int rgbInt = startingPixel.getRGB();
         img.setRGB(point.x,point.y,rgbInt);
@@ -27,18 +32,23 @@ public class NearestNeighbor extends Algorithm
         
         while(!available.isEmpty())
         {
-            int threshold = 100;
+            int threshold = 10;
             Color best = colorList.get(0);
             int currentRGB = img.getRGB(point.x, point.y);
             for(Color c : colorList) 
             {
-                if(Math.abs(currentRGB - c.getRGB()) < threshold)
+                if(distBetween(currentRGB, c.getRGB()) < threshold)
                 {
                     best = c;
                     continue;
                 }
             }
-            
+            //debug
+            if(best.equals(colorList.get(0)))
+                no_good++;
+            else
+                good++;
+
             available.remove(point);
             colorList.remove(best);
 
@@ -46,20 +56,12 @@ public class NearestNeighbor extends Algorithm
             img.setRGB(point.x, point.y, best.getRGB());
             
         }
-
+        System.out.println("Good pixels:"+good + " Bad:" + no_good);
     }
 
     static void selectNextPoint(Point p, HashSet<Point> possible)
     {
-        int currX = p.x - 1;
-        int currY = p.y + 1;
-        ArrayList<Point> points = new ArrayList<Point>(9);
-        for(int i = 0; i < 3; i++)
-        {
-            points.add(new Point(currX,currY + i));
-            points.add(new Point(currX + 1,currY + i));
-            points.add(new Point(currX + 2,currY + i));
-        }
+        ArrayList<Point> points = getSurroundingPoints(p);
 
         Collections.shuffle(points);
 
@@ -71,7 +73,7 @@ public class NearestNeighbor extends Algorithm
                 return;
             }
         }
-        //Select next random point off hashSet is pixels around point are exhausted
+        //Select next random point off hashSet if pixels around point are exhausted
         for(Point next : possible)
         {
             p.x = next.x;
@@ -84,5 +86,28 @@ public class NearestNeighbor extends Algorithm
         for(int i = 0; i < 256; i++)
             for(int j = 0; j<256; j++)
                 hs.add(new Point(i,j));
+    }
+
+    static double distBetween(int a, int b) // Euclidean color distance, see : https://en.wikipedia.org/wiki/Color_difference
+    {
+        int rD = (a >> 16) - (b >> 16);
+        int gD = (a >> 8 & 255) - (b >> 8 & 255); //extract color values from RGB int
+        int bD = (a & 255) - (b & 255);
+
+        return Math.sqrt(Math.pow(rD,2) + Math.pow(gD,2) + Math.pow(bD,2));
+    }
+
+    static ArrayList<Point> getSurroundingPoints(Point p)
+    {
+        int currX = p.x - 1;
+        int currY = p.y + 1;
+        ArrayList<Point> arr = new ArrayList<Point>(9);
+        for(int i = 0; i < 3; i++)
+        {
+            arr.add(new Point(currX,currY + i));
+            arr.add(new Point(currX + 1,currY + i));
+            arr.add(new Point(currX + 2,currY + i));
+        }
+        return arr;
     }
 }
