@@ -45,4 +45,9 @@ public class ImageCreator
                 }
     }
 
+    public void setAlgo(Algorithm algo)
+    {
+        this.algorithm = algo;
+    }
+
 }

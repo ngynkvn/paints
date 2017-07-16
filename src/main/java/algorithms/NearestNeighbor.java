@@ -11,7 +11,18 @@ import java.util.*;
  */
 public class NearestNeighbor extends Algorithm
 {
-    private static final int THRESHOLD = 10;
+    private int THRESHOLD;
+
+    public NearestNeighbor(int THRESHOLD)
+    {
+        this.THRESHOLD = THRESHOLD;
+    }
+
+    public NearestNeighbor()
+    {
+        THRESHOLD = 15;
+    }
+
     public void createImage(BufferedImage img)
     {
         Color [] _arr = createColorArray();
@@ -28,7 +39,7 @@ public class NearestNeighbor extends Algorithm
         int rgbInt = startingPixel.getRGB();
         img.setRGB(point.x,point.y,rgbInt);
         selectNextPoint(point, available);
-        
+
         while(!available.isEmpty())
         {
             Color best = colorList.get(0);
@@ -38,10 +49,10 @@ public class NearestNeighbor extends Algorithm
                 if(distBetween(currentRGB, c.getRGB()) < THRESHOLD)
                 {
                     best = c;
-                    continue;
+                    break;
                 }
             }
-
+            System.out.println("Setting "+best + " at point "+ point);
             available.remove(point);
             colorList.remove(best);
 
