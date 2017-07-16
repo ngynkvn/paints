@@ -20,7 +20,7 @@ public class NearestNeighbor extends Algorithm
 
     public NearestNeighbor()
     {
-        THRESHOLD = 15;
+        THRESHOLD = 10;
     }
 
     public void createImage(BufferedImage img)
@@ -52,7 +52,6 @@ public class NearestNeighbor extends Algorithm
                     break;
                 }
             }
-            System.out.println("Setting "+best + " at point "+ point);
             available.remove(point);
             colorList.remove(best);
 
