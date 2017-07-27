@@ -28,7 +28,7 @@ public class AlgorithmTest
 
 		for(Color c : arr)
 		{
-			assertFalse("Found a duplicate color.",b.contains( Algorithm.rgbInt(c) ) );
+			assertFalse("Found a duplicate color.", b.contains( Algorithm.rgbInt(c) ) );
 			b.add(Algorithm.rgbInt(c));
 		}
 	}

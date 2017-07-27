@@ -11,12 +11,11 @@ public abstract class Algorithm
      {
           return (r<<16) + (g<<8) + (b);
      }
-
      public static int rgbInt(Color c)
      {
         return rgbInt(c.getRed(),c.getGreen(),c.getBlue());
      }
-
+    
     public static Color[] createColorArray()
     {
         Color[] arr = new Color[32*64*32];

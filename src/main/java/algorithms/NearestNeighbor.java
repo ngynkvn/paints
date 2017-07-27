@@ -61,7 +61,7 @@ public class NearestNeighbor extends Algorithm
         }
     }
 
-    static void selectNextPoint(Point p, HashSet<Point> possible)
+    private static void selectNextPoint(Point p, HashSet<Point> possible)
     {
         ArrayList<Point> points = getSurroundingPoints(p);
 
@@ -76,21 +76,21 @@ public class NearestNeighbor extends Algorithm
             }
         }
         //Select next random point off hashSet if pixels around point are exhausted
-        for(Point next : possible)
-        {
-            p.x = next.x;
-            p.y = next.y;
-            return;
-        }    
+
+        if(possible.size() != 0){
+            Point n = possible.iterator().next();
+            p.x = n.x;
+            p.y = n.y;
+        }
     }
-    static void populate(HashSet<Point> hs)
+    private static void populate(HashSet<Point> hs)
     {
         for(int i = 0; i < 256; i++)
             for(int j = 0; j<256; j++)
                 hs.add(new Point(i,j));
     }
 
-    static double distBetween(int a, int b) // Euclidean color distance, see : https://en.wikipedia.org/wiki/Color_difference
+    private static double distBetween(int a, int b) // Euclidean color distance, see : https://en.wikipedia.org/wiki/Color_difference
     {
         int rD = (a >> 16) - (b >> 16);
         int gD = (a >> 8 & 255) - (b >> 8 & 255); //extract color values from RGB int
