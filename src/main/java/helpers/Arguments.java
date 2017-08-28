@@ -6,46 +6,36 @@ package helpers;
  * 
  * @author Kevin Nguyen
  */
-public class Arguments
-{
+public class Arguments {
     private final String fileOutName;
     private final String algo;
 
-    public Arguments(String [] args)
-    {
-        if(args.length == 0)
-        {
+    public Arguments(String[] args) {
+        if (args.length == 0) {
             fileOutName = "out.png";
             algo = "default";
-        }
-        else if(args.length == 1)
-        {
+        } else if (args.length == 1) {
             fileOutName = ensurePngExtension(args[0]);
             algo = "default";
-        }
-        else
-        {
+        } else {
             fileOutName = ensurePngExtension(args[0]);
             algo = args[1];
         }
     }
 
-    static String ensurePngExtension(String fileName)
-    {
-        if(fileName.contains(".png")){
+    static String ensurePngExtension(String fileName) {
+        if (fileName.contains(".png")) {
             return fileName;
         } else {
             return fileName.concat(".png");
         }
     }
 
-    public String getFileOutName()
-    {
+    public String getFileOutName() {
         return fileOutName;
     }
 
-    public String getAlgo()
-    {
+    public String getAlgo() {
         return algo;
     }
 }

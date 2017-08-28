@@ -13,17 +13,30 @@ import javax.imageio.ImageIO;
  * Responsible for instantiating the correct algorithm based on user input.
  * ImageCreator also holds the logic for creating the BufferedImage and writing it to a png file.
  */
-public class ImageCreator
-{
+public class ImageCreator {
     private Algorithm algorithm;
+    private boolean capturePlayback;
     private Map<String, Algorithm> algorithmMap = createAlgorithmMap();
-    public ImageCreator(String algo)
-    {
+
+    public ImageCreator(String algo) {
         algorithm = algorithmMap.get(algo);
 
-        System.out.println("Using "+ algorithm.getClass().getSimpleName() +" algorithm");
+        //Default algo
+        if(algorithm == null)
+            algorithm = new NearestNeighbor();
+
+        System.out.println("Using " + algorithm.getClass().getSimpleName() + " algorithm");
     }
 
+    public void setCapturePlayback(boolean b)
+    {
+        capturePlayback = b;
+    }
+
+    public void createImage(BufferedImage img)
+    {
+        algorithm.createImage(img);
+    }
     /**
      * Creates a buffered image that can be processed by an algorithm. Once finished the method will
      * attempt to write the image to either the default file out.png or a user-defined output name.
@@ -32,18 +45,17 @@ public class ImageCreator
      * @param width Width of image to write to
      * @param height Height of the image to write to
      */
-    public void write(File f, int width, int height)
-    {
+    public void write(File f, int width, int height) {
 
-                BufferedImage img = new BufferedImage(width,height,BufferedImage.TYPE_INT_RGB);
+        BufferedImage img = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 
-                algorithm.createImage(img);
+        createImage(img);
 
-                try {
-                ImageIO.write(img,"png",f);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+        try {
+            ImageIO.write(img, "png", f);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     static Map<String, Algorithm> createAlgorithmMap() //there is a better solution to this.
@@ -54,14 +66,14 @@ public class ImageCreator
         Map<String, Algorithm> hs = new HashMap<>();
 
         hs.put("lazy", lazy);
-        hs.put("lines",lazy);
-        hs.put("nearest",nearest);
-        hs.put("default",nearest);
+        hs.put("lines", lazy);
+        hs.put("nearest", nearest);
+        hs.put("default", nearest);
 
         return hs;
     }
-    public void setAlgo(Algorithm algo)
-    {
+
+    public void setAlgo(Algorithm algo) {
         this.algorithm = algo;
     }
 }

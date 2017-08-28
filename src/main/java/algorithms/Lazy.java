@@ -8,15 +8,12 @@ import java.awt.*;
  * Not really an algorithm, implementation here just displays the created color array.
  * Also serves as a demonstration that the algorithm is actually working
  */
-public class Lazy extends Algorithm
-{
-    public void createImage(BufferedImage img)
-    {
+public class Lazy extends Algorithm {
+    public void createImage(BufferedImage img) {
 
         Color[] pixelArray = createColorArray();
 
-        for(int i = 0; i < 32*64*32; i++)
-        {
+        for (int i = 0; i < 32 * 64 * 32; i++) {
             int x = i & 255;
             int y = i / 256;
             Color pix = pixelArray[i];
