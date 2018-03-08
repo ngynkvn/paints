@@ -12,10 +12,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
+import javafx.scene.image.*;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 import java.awt.image.BufferedImage;
+import algorithms.Pair;
+import java.util.*;
+import java.awt.*;
 
 public class App extends Application {
 
@@ -46,7 +50,12 @@ public class App extends Application {
                     BufferedImage img = new BufferedImage(256,256,BufferedImage.TYPE_INT_RGB);
                     ImageCreator imageCreator = new ImageCreator(algoField.getText());
                     imageCreator.createImage(img);
-                    SwingFXUtils.toFXImage(img,image);
+                    ArrayList<Pair<Point,Integer>> order = imageCreator.getOrder();
+                    PixelWriter pw = image.getPixelWriter();
+                    for(int i = 0; i < 10000; i++){
+                        Pair<Point,Integer> p = order.get(i);
+                        pw.setArgb(p.first().x,p.first().y,p.second());
+                    }
                 }
         );
         grid.add(start,2,0);
@@ -75,6 +84,6 @@ public class App extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
 
-//        grid.setGridLinesVisible(true);
+    //    grid.setGridLinesVisible(true);
     }
 }

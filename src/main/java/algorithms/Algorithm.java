@@ -2,17 +2,22 @@ package algorithms;
 
 import java.awt.image.BufferedImage;
 import java.awt.*;
+import java.util.*;
 
 public abstract class Algorithm {
+
+    boolean done = false;
+    
     public abstract void createImage(BufferedImage i);
+    public abstract ArrayList<Pair<Point,Integer>> getOrder();
+
+    public static int rgbInt(Color c) {
+        return rgbInt(c.getRed(), c.getGreen(), c.getBlue());
+    }
 
     public static int rgbInt(int r, int g, int b) //Creates int value by bit shifting rgb values into their appropriate spots.
     {
         return (r << 16) + (g << 8) + (b);
-    }
-
-    public static int rgbInt(Color c) {
-        return rgbInt(c.getRed(), c.getGreen(), c.getBlue());
     }
 
     public static Color[] createColorArray() {

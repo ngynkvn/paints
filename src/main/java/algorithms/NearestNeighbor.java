@@ -6,11 +6,18 @@ import java.util.*;
 
 /**
  * I intended for this to be similar to a "nearest neighbor" in terms of selecting colors
- * The algorithm attempts to select colors off the color array that are similar to the current pixel * being viewed. Color differences are computed using the pythagorean theorem, however apparently 
+ * The algorithm attempts to select colors off the color array that are similar to the current pixel * being viewed. 
+ * Color differences are computed using the pythagorean theorem, however apparently
  * this does not match up with human perceptions. Still happy with how the picture turns out.
  */
 public class NearestNeighbor extends Algorithm {
     private int THRESHOLD;
+
+    private ArrayList<Pair<Point, Integer>> order;
+
+    {
+        this.order = new ArrayList<>();
+    }
 
     public NearestNeighbor(int THRESHOLD) {
         this.THRESHOLD = THRESHOLD;
@@ -49,11 +56,15 @@ public class NearestNeighbor extends Algorithm {
             colorList.remove(best);
 
             selectNextPoint(point, available);
+            order.add(new Pair(new Point(point), best.getRGB()));
             img.setRGB(point.x, point.y, best.getRGB());
 
         }
     }
-
+    public ArrayList<Pair<Point,Integer>> getOrder()
+    {
+        return order;
+    }
     private static void selectNextPoint(Point p, HashSet<Point> possible) {
         ArrayList<Point> points = getSurroundingPoints(p);
 

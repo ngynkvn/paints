@@ -6,6 +6,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.*;
+import java.awt.*;
 
 import javax.imageio.ImageIO;
 
@@ -15,7 +17,6 @@ import javax.imageio.ImageIO;
  */
 public class ImageCreator {
     private Algorithm algorithm;
-    private boolean capturePlayback;
     private Map<String, Algorithm> algorithmMap = createAlgorithmMap();
 
     public ImageCreator(String algo) {
@@ -28,11 +29,10 @@ public class ImageCreator {
         System.out.println("Using " + algorithm.getClass().getSimpleName() + " algorithm");
     }
 
-    public void setCapturePlayback(boolean b)
+    public ArrayList<Pair<Point,Integer>> getOrder()
     {
-        capturePlayback = b;
+        return algorithm.getOrder();
     }
-
     public void createImage(BufferedImage img)
     {
         algorithm.createImage(img);

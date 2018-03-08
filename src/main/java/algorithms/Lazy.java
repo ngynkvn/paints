@@ -2,13 +2,14 @@ package algorithms;
 
 import java.awt.image.BufferedImage;
 import java.awt.*;
+import java.util.*;
 
 /* 
  * 
  * Not really an algorithm, implementation here just displays the created color array.
  * Also serves as a demonstration that the algorithm is actually working
  */
-public class Lazy extends Algorithm {
+public class Lazy  extends Algorithm {
     public void createImage(BufferedImage img) {
 
         Color[] pixelArray = createColorArray();
@@ -25,5 +26,9 @@ public class Lazy extends Algorithm {
 
             img.setRGB(x, y, rgb);
         }
+    }
+    public ArrayList<Pair<Point,Integer>> getOrder()
+    {
+        return null;
     }
 }

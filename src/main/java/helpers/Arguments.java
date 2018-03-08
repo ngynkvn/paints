@@ -24,7 +24,7 @@ public class Arguments {
     }
 
     static String ensurePngExtension(String fileName) {
-        if (fileName.contains(".png")) {
+        if (fileName.toLowerCase().endsWith(".png")) {
             return fileName;
         } else {
             return fileName.concat(".png");
